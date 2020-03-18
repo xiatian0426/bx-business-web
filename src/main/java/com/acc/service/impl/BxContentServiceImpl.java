@@ -4,6 +4,7 @@ import com.acc.dao.BxContentMapper;
 import com.acc.dao.UserInfoMapper;
 import com.acc.exception.SelectException;
 import com.acc.model.BxContent;
+import com.acc.model.BxContentDetail;
 import com.acc.service.IBxContentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +22,19 @@ public class BxContentServiceImpl extends BaseServiceImpl<BxContent> implements 
 	@Autowired
 	private BxContentMapper bxContentMapper;
 
-    public List<BxContent> getProductByMemId(String memberId) throws SelectException{
-        return bxContentMapper.getProductByMemId(memberId);
+	@Override
+    public List<BxContent> getBanByMemberId(String memberId) throws SelectException{
+        return bxContentMapper.getBanByMemberId(memberId);
     }
-	
+
+    @Override
+    public List<BxContent> geContentByBlockId(String memberId,String blockId) throws SelectException{
+        return bxContentMapper.geContentByBlockId(memberId,blockId);
+    }
+
+    @Override
+    public List<BxContentDetail>  getContentDetailByContentId(String contentId) throws SelectException{
+        return bxContentMapper.getContentDetailByContentId(contentId);
+    }
+
 }

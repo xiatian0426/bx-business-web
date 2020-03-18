@@ -1,11 +1,5 @@
 package com.acc.model;
 
-import com.acc.util.CalendarUtil;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 /**
  * @author 
  * @version 1.0
@@ -13,23 +7,23 @@ import java.util.List;
  */
 
 
-public class BxContent implements java.io.Serializable, Cloneable{
+public class BxBlock implements java.io.Serializable, Cloneable{
 	
-	private static final long serialVersionUID = 1736258302889590552L;
+	private static final long serialVersionUID = 1736258202889590552L;
 
 	private int id;
 
-    private String contentName;
+    private Integer navigationId;
 
-    private String contentImg;
-
-    private Integer contentImgType;//0:图片 1:文字
+    private String blockName;
 	
-	private Integer contentOrder;
+	private String blockImg;
 
-    private Integer status;
+    private Integer blockOrder;
 
     private Integer memberId;
+
+    private Integer mouldId;
 
     private Integer createrId;
 
@@ -44,7 +38,7 @@ public class BxContent implements java.io.Serializable, Cloneable{
      */
     private Integer modifierId;
 
-    private String isbanner;
+    private Integer mouldType;//0:正常商品类型 1:咨询类型 2:关于我们类型
 
     public int getId() {
         return id;
@@ -54,36 +48,36 @@ public class BxContent implements java.io.Serializable, Cloneable{
         this.id = id;
     }
 
-    public String getContentName() {
-        return contentName;
+    public Integer getNavigationId() {
+        return navigationId;
     }
 
-    public void setContentName(String contentName) {
-        this.contentName = contentName;
+    public void setNavigationId(Integer navigationId) {
+        this.navigationId = navigationId;
     }
 
-    public String getContentImg() {
-        return contentImg;
+    public String getBlockName() {
+        return blockName;
     }
 
-    public void setContentImg(String contentImg) {
-        this.contentImg = contentImg;
+    public void setBlockName(String blockName) {
+        this.blockName = blockName;
     }
 
-    public Integer getContentOrder() {
-        return contentOrder;
+    public String getBlockImg() {
+        return blockImg;
     }
 
-    public void setContentOrder(Integer contentOrder) {
-        this.contentOrder = contentOrder;
+    public void setBlockImg(String blockImg) {
+        this.blockImg = blockImg;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getBlockOrder() {
+        return blockOrder;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setBlockOrder(Integer blockOrder) {
+        this.blockOrder = blockOrder;
     }
 
     public Integer getMemberId() {
@@ -92,6 +86,14 @@ public class BxContent implements java.io.Serializable, Cloneable{
 
     public void setMemberId(Integer memberId) {
         this.memberId = memberId;
+    }
+
+    public Integer getMouldId() {
+        return mouldId;
+    }
+
+    public void setMouldId(Integer mouldId) {
+        this.mouldId = mouldId;
     }
 
     public Integer getCreaterId() {
@@ -126,20 +128,12 @@ public class BxContent implements java.io.Serializable, Cloneable{
         this.modifierId = modifierId;
     }
 
-    public String getIsbanner() {
-        return isbanner;
+    public Integer getMouldType() {
+        return mouldType;
     }
 
-    public void setIsbanner(String isbanner) {
-        this.isbanner = isbanner;
-    }
-
-    public Integer getContentImgType() {
-        return contentImgType;
-    }
-
-    public void setContentImgType(Integer contentImgType) {
-        this.contentImgType = contentImgType;
+    public void setMouldType(Integer mouldType) {
+        this.mouldType = mouldType;
     }
 }
 

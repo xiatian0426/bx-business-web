@@ -6,21 +6,34 @@
         <result property="id" column="ID" jdbcType="INTEGER"/>
         <result property="contentName" column="CONTENT_NAME" jdbcType="VARCHAR"/>
         <result property="contentImg" column="CONTENT_IMG" jdbcType="VARCHAR"/>
-        <result property="contentOrder" column="CONTENT_ORDER" jdbcType="VARCHAR"/>
-        <result property="status" column="STATUS" jdbcType="VARCHAR"/>
-        <result property="memberId" column="MEMBER_ID" jdbcType="VARCHAR"/>
+        <result property="contentImgType" column="CONTENT_IMG_TYPE" jdbcType="INTEGER"/>
+        <result property="contentOrder" column="CONTENT_ORDER" jdbcType="INTEGER"/>
+        <result property="status" column="STATUS" jdbcType="INTEGER"/>
+        <result property="memberId" column="MEMBER_ID" jdbcType="INTEGER"/>
         <result property="createrId" column="CREATER_ID" jdbcType="INTEGER"/>
         <result property="createDate" column="CREATE_DATE" jdbcType="VARCHAR"/>
         <result property="modifyDate" column="MODIFY_DATE" jdbcType="VARCHAR"/>
-        <result property="modifierId" column="MODIFIER_ID" jdbcType="VARCHAR"/>
-        <result property="isbanner" column="ISBANNER" jdbcType="VARCHAR"/>
+        <result property="modifierId" column="MODIFIER_ID" jdbcType="INTEGER"/>
+        <result property="isbanner" column="ISBANNER" jdbcType="INTEGER"/>
 	</resultMap>
+
+    <resultMap id="bxContentDetail" type="com.acc.model.BxContentDetail">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="contentId" column="CONTENT_ID" jdbcType="INTEGER"/>
+        <result property="contentDetailImg" column="CONTENTDETAIL_IMG" jdbcType="VARCHAR"/>
+        <result property="contentDetailOrder" column="CONTENTDETAIL_ORDER" jdbcType="INTEGER"/>
+        <result property="createrId" column="CREATER_ID" jdbcType="INTEGER"/>
+        <result property="createDate" column="CREATE_DATE" jdbcType="VARCHAR"/>
+        <result property="modifyDate" column="MODIFY_DATE" jdbcType="VARCHAR"/>
+        <result property="modifierId" column="MODIFIER_ID" jdbcType="INTEGER"/>
+    </resultMap>
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="columns">
 		ID,
 		CONTENT_NAME,
-		CONTENT_IMG,
+		CAST(CONTENT_IMG AS CHAR(10000) CHARACTER SET utf8mb4) CONTENT_IMG,
+		CONTENT_IMG_TYPE,
 		CONTENT_ORDER,
         STATUS,
         MEMBER_ID,
@@ -58,7 +71,7 @@
 		</if> -->
 	</select>
 
-    <select id="getProductByMemId" resultMap="bxContent">
+    <select id="getBanByMemberId" resultMap="bxContent">
         SELECT
         <include refid="columns" />
         FROM BX_CONTENT c
@@ -68,4 +81,46 @@
         </if>
     </select>
 
+    <select id="geContentByBlockId" resultMap="bxContent">
+        SELECT ID,
+        CONTENT_NAME,
+        CAST(CONTENT_IMG AS CHAR(10000) CHARACTER SET utf8mb4) CONTENT_IMG,
+        CONTENT_IMG_TYPE,
+        CONTENT_ORDER,
+        STATUS,
+        MEMBER_ID,
+        CREATER_ID,
+        CREATE_DATE,
+        MODIFY_DATE,
+        MODIFIER_ID,
+        ISBANNER
+        FROM BX_CONTENT c,BX_BLOCK_CONTENT b
+        WHERE c.ID=b.CONTENT_ID
+        AND c.STATUS = 1
+        AND b.BLOCKI_ID=3
+        <if test="memberId != null and memberId != ''">
+            AND c.MEMBER_ID = #{memberId}
+        </if>
+        <if test="blockId != null and blockId != ''">
+            AND b.BLOCKI_ID = #{blockId}
+        </if>
+        ORDER BY CONTENT_ORDER,CREATE_DATE
+    </select>
+
+    <select id="getContentDetailByContentId" resultMap="bxContentDetail">
+        SELECT ID,
+        CONTENT_ID,
+        CONTENTDETAIL_IMG,
+        CONTENTDETAIL_ORDER,
+        CREATER_ID,
+        CREATE_DATE,
+        MODIFY_DATE,
+        MODIFIER_ID
+        FROM BX_CONTENT_DETAIL c
+        WHERE 1 = 1
+        <if test="contentId != null and contentId != ''">
+            AND c.CONTENT_ID = #{contentId}
+        </if>
+        ORDER BY CONTENTDETAIL_ORDER,CREATE_DATE
+    </select>
 </mapper>

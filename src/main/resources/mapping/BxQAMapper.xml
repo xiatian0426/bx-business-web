@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.acc.dao.BxQAMapper">
+
+	<resultMap id="bxQA" type="com.acc.model.BxQA">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="ask" column="ASK" jdbcType="VARCHAR"/>
+        <result property="answer" column="ANSWER" jdbcType="VARCHAR"/>
+        <result property="memberId" column="MEMBER_ID" jdbcType="INTEGER"/>
+        <result property="createDate" column="CREATE_DATE" jdbcType="VARCHAR"/>
+        <result property="createrId" column="CREATER_ID" jdbcType="INTEGER"/>
+        <result property="qaOrder" column="QA_ORDER" jdbcType="INTEGER"/>
+	</resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO BX_QA (
+        	ASK,
+            ANSWER,
+            MEMBER_ID,
+            CREATE_DATE,
+            CREATER_ID,
+            QA_ORDER
+        ) VALUES (
+        	#{ask} ,
+        	#{answer},
+            #{memberId} ,
+        	now() ,
+        	#{createrId} ,
+        	#{qaOrder}
+        )
+    </insert>
+</mapper>
