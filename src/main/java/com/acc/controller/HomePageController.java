@@ -129,7 +129,7 @@ public class HomePageController {
     }
 
     /**
-     * 根据会员id和模块id获取列表数据(mouldType=0/3)
+     * 根据会员id和模块id获取列表数据(mouldType=0/2)
      * @param request
      * @param response
      * @return
