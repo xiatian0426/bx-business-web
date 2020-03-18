@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.acc.dao.BxContentMapper">
+
+	<resultMap id="bxContent" type="com.acc.model.BxContent">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="contentName" column="CONTENT_NAME" jdbcType="VARCHAR"/>
+        <result property="contentImg" column="CONTENT_IMG" jdbcType="VARCHAR"/>
+        <result property="contentOrder" column="CONTENT_ORDER" jdbcType="VARCHAR"/>
+        <result property="status" column="STATUS" jdbcType="VARCHAR"/>
+        <result property="memberId" column="MEMBER_ID" jdbcType="VARCHAR"/>
+        <result property="createrId" column="CREATER_ID" jdbcType="INTEGER"/>
+        <result property="createDate" column="CREATE_DATE" jdbcType="VARCHAR"/>
+        <result property="modifyDate" column="MODIFY_DATE" jdbcType="VARCHAR"/>
+        <result property="modifierId" column="MODIFIER_ID" jdbcType="VARCHAR"/>
+        <result property="isbanner" column="ISBANNER" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		ID,
+		CONTENT_NAME,
+		CONTENT_IMG,
+		CONTENT_ORDER,
+        STATUS,
+        MEMBER_ID,
+        CREATER_ID,
+        CREATE_DATE,
+        MODIFY_DATE,
+        MODIFIER_ID,
+        ISBANNER
+	</sql>
+
+	<sql id="pageWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="id != 0 and id != '' and id != null">
+				AND ID = #{id}
+			</if>
+        </where>
+	</sql>
+
+	<select id="pageCount" resultType="long">
+		SELECT count(*) FROM BX_CONTENT
+		<include refid="pageWhere" />
+	</select>
+	
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="findPage" resultMap="bxContent">
+		SELECT
+		<include refid="columns" />
+		FROM BX_CONTENT
+		<include refid="pageWhere" />
+		LIMIT #{skip},#{pageSize}
+		<!-- <if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if> -->
+	</select>
+
+    <select id="getProductByMemId" resultMap="bxContent">
+        SELECT
+        <include refid="columns" />
+        FROM BX_CONTENT c
+        WHERE STATUS = 1
+        <if test="memberId != null and memberId != ''">
+            AND MEMBER_ID = #{memberId}
+        </if>
+    </select>
+
+</mapper>
