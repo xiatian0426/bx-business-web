@@ -10,7 +10,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <acc.root.local>39.105.44.125</acc.root.local>
-		<acc.web.port>8087</acc.web.port>
+		<acc.web.port>80</acc.web.port>
 	</properties>
 	<dependencies>
 		<dependency>  
@@ -290,7 +290,7 @@
 					<path>/</path>
 					<port>80</port>
 					<uriEncoding>UTF-8</uriEncoding>
-					<url>http://${acc.root.local}:${acc.web.port}</url>
+					<url>http://${acc.root.local}:${acc.web.port}/bx-business-web</url>
 					<server>myserver</server>
 				</configuration>
 			</plugin>
@@ -308,11 +308,11 @@
                 <!--<pf.project.root>${project.basedir}</pf.project.root>-->
                 <!--<pf.project.root>D:\\own\\bx-web\\src\\main\\webapp\\</pf.project.root>-->
                 <pf.project.root>/usr/local/tomcat8/webapps/ROOT/</pf.project.root>
-				<pf.web.root>http://${acc.root.local}:${acc.web.port}</pf.web.root>
-				<pf.css.root>http://${acc.root.local}:${acc.web.port}/res/css</pf.css.root>
-				<pf.image.root>http://${acc.root.local}:${acc.web.port}/res/images</pf.image.root>
-				<pf.js.root>http://${acc.root.local}:${acc.web.port}/res/js</pf.js.root>
-				<pf.tool.root>http://${acc.root.local}:${acc.web.port}/res/tools</pf.tool.root>
+				<pf.web.root>http://${acc.root.local}:${acc.web.port}/bx-business-web</pf.web.root>
+				<pf.css.root>http://${acc.root.local}:${acc.web.port}/bx-business-web/res/css</pf.css.root>
+				<pf.image.root>http://${acc.root.local}:${acc.web.port}/bx-business-web/res/images</pf.image.root>
+				<pf.js.root>http://${acc.root.local}:${acc.web.port}/bx-business-web/res/js</pf.js.root>
+				<pf.tool.root>http://${acc.root.local}:${acc.web.port}/bx-business-web/res/tools</pf.tool.root>
 				
 			</properties>
 		</profile>
