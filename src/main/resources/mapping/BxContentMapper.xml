@@ -20,8 +20,8 @@
     <resultMap id="bxContentDetail" type="com.acc.model.BxContentDetail">
         <result property="id" column="ID" jdbcType="INTEGER"/>
         <result property="contentId" column="CONTENT_ID" jdbcType="INTEGER"/>
-        <result property="contentDetailImg" column="CONTENTDETAIL_IMG" jdbcType="VARCHAR"/>
-        <result property="contentDetailOrder" column="CONTENTDETAIL_ORDER" jdbcType="INTEGER"/>
+        <result property="contentDetailImg" column="CONTENT_DETAIL_IMG" jdbcType="VARCHAR"/>
+        <result property="contentDetailOrder" column="CONTENT_DETAIL_ORDER" jdbcType="INTEGER"/>
         <result property="createrId" column="CREATER_ID" jdbcType="INTEGER"/>
         <result property="createDate" column="CREATE_DATE" jdbcType="VARCHAR"/>
         <result property="modifyDate" column="MODIFY_DATE" jdbcType="VARCHAR"/>
@@ -82,18 +82,18 @@
     </select>
 
     <select id="geContentByBlockId" resultMap="bxContent">
-        SELECT ID,
-        CONTENT_NAME,
-        CAST(CONTENT_IMG AS CHAR(10000) CHARACTER SET utf8mb4) CONTENT_IMG,
-        CONTENT_IMG_TYPE,
-        CONTENT_ORDER,
-        STATUS,
-        MEMBER_ID,
-        CREATER_ID,
-        CREATE_DATE,
-        MODIFY_DATE,
-        MODIFIER_ID,
-        ISBANNER
+        SELECT c.ID,
+        c.CONTENT_NAME,
+        CAST(c.CONTENT_IMG AS CHAR(10000) CHARACTER SET utf8mb4) CONTENT_IMG,
+        c.CONTENT_IMG_TYPE,
+        c.CONTENT_ORDER,
+        c.STATUS,
+        c.MEMBER_ID,
+        c.CREATER_ID,
+        c.CREATE_DATE,
+        c.MODIFY_DATE,
+        c.MODIFIER_ID,
+        c.ISBANNER
         FROM BX_CONTENT c,BX_BLOCK_CONTENT b
         WHERE c.ID=b.CONTENT_ID
         AND c.STATUS = 1
@@ -110,8 +110,8 @@
     <select id="getContentDetailByContentId" resultMap="bxContentDetail">
         SELECT ID,
         CONTENT_ID,
-        CONTENTDETAIL_IMG,
-        CONTENTDETAIL_ORDER,
+        CONTENT_DETAIL_IMG,
+        CONTENT_DETAIL_ORDER,
         CREATER_ID,
         CREATE_DATE,
         MODIFY_DATE,
@@ -121,6 +121,6 @@
         <if test="contentId != null and contentId != ''">
             AND c.CONTENT_ID = #{contentId}
         </if>
-        ORDER BY CONTENTDETAIL_ORDER,CREATE_DATE
+        ORDER BY CONTENT_DETAIL_ORDER,CREATE_DATE
     </select>
 </mapper>
