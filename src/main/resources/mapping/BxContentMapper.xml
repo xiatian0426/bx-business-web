@@ -97,7 +97,6 @@
         FROM BX_CONTENT c,BX_BLOCK_CONTENT b
         WHERE c.ID=b.CONTENT_ID
         AND c.STATUS = 1
-        AND b.BLOCKI_ID=3
         <if test="memberId != null and memberId != ''">
             AND c.MEMBER_ID = #{memberId}
         </if>

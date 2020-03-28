@@ -108,6 +108,17 @@ public class HomePageController {
                 if(list != null && list.size()>0){
                     for(BxBlock bxBlock:list){
                         bxBlock.setBlockImg(Constants.BUSADMINPATH + Constants.BLOCKIMGPATH+bxBlock.getId()+"/"+bxBlock.getBlockImg());
+                        if(navigationId!=null && "2".equals(navigationId)){
+                            List<BxContent> bxContentList = bxContentService.geContentByBlockId(memberId,String.valueOf(bxBlock.getId()));
+                            if(bxContentList != null && bxContentList.size()>0){
+                                for(BxContent bxContent:bxContentList){
+                                    if(bxContent.getContentImgType()!=null && bxContent.getContentImgType()==0){//图片需要加前缀
+                                        bxContent.setContentImg(Constants.BUSADMINPATH + Constants.CONTENTIMGPATH+bxContent.getId()+"/"+bxContent.getContentImg());
+                                    }
+                                }
+                            }
+                            bxBlock.setBxContentList(bxContentList);
+                        }
                     }
                 }
                 map.put("list",list);

@@ -1,5 +1,7 @@
 package com.acc.model;
 
+import java.util.List;
+
 /**
  * @author 
  * @version 1.0
@@ -39,6 +41,8 @@ public class BxBlock implements java.io.Serializable, Cloneable{
     private Integer modifierId;
 
     private Integer mouldType;//0:正常商品类型 1:咨询类型 2:关于我们类型
+
+    private List<BxContent> bxContentList = null;
 
     public int getId() {
         return id;
@@ -134,6 +138,14 @@ public class BxBlock implements java.io.Serializable, Cloneable{
 
     public void setMouldType(Integer mouldType) {
         this.mouldType = mouldType;
+    }
+
+    public List<BxContent> getBxContentList() {
+        return bxContentList;
+    }
+
+    public void setBxContentList(List<BxContent> bxContentList) {
+        this.bxContentList = bxContentList;
     }
 }
 
